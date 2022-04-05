@@ -25,4 +25,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FSharpDemo\FSharpDemo.fsproj" />
+  </ItemGroup>
+
 </Project>

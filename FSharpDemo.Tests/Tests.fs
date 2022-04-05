@@ -2,7 +2,15 @@ module Tests
 
 open System
 open Xunit
+open Models
 
 [<Fact>]
-let ``My test`` () =
-    Assert.True(true)
+let ``Can create a person`` () =
+    let fred = 
+        { Id = 4
+          GivenName = "Fred"
+          FamilyName = "Jones" }
+
+    Assert.Equal(fred.GivenName, "Fred")
+
+
