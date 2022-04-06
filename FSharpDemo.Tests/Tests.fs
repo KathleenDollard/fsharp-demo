@@ -3,6 +3,11 @@ module Tests
 open System
 open Xunit
 open Models
+open Databases
+
+let store = SimpleStore()
+let save = store.Save
+let load = store.LoadAll
 
 [<Fact>]
 let ``Can create a person`` () =
@@ -55,3 +60,12 @@ let ``Can create an manager with employees`` () =
           Employee (Person.Create 3 "Ben" "Brown")])
 
     Assert.Equal((Employee.Person manager).GivenName, "Sally")
+
+
+[<Fact>]
+let ``Can save and load persons`` () =
+    let persons = Person.TestData
+    save persons
+    let reloaded = load()
+
+    Assert.Equal<Person>(persons, reloaded)
