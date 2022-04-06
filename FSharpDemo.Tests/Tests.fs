@@ -94,3 +94,25 @@ let ``Can save and load employees`` () =
     let reloaded = load()
 
     Assert.Equal<Employee>(emps, reloaded)
+
+
+[<Fact>]
+let ``Can save and load persons via Json`` () =
+    let persons = Person.TestData
+
+    save persons
+    let reloaded = load()
+
+    Assert.Equal<Person>(persons, reloaded)
+
+
+[<Fact>]
+let ``Can save and load employees via Json`` () =
+    let emps = 
+        [ for p in Person.TestData do 
+            Employee p ]
+
+    save emps
+    let reloaded = load()
+
+    Assert.Equal<Employee>(emps, reloaded)
