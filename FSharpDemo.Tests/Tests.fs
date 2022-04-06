@@ -4,6 +4,7 @@ open System
 open Xunit
 open Models
 open Databases
+open Databases.StorageFactory
 
 //let store = SimpleStore()
 //let save = store.Save
@@ -14,9 +15,9 @@ open Databases
 //let saveEmployee = storeEmployee.Save
 //let loadEmployee = storeEmployee.LoadAll
 
-let Storage<'t> = 
-    let store = SimpleStore<'t>()
-    store.Save, store.LoadAll
+//let Storage<'t> = 
+//    let store = SimpleStore<'t>()
+//    store.Save, store.LoadAll
 
 
 [<Fact>]
@@ -76,7 +77,7 @@ let ``Can create an manager with employees`` () =
 let ``Can save and load persons`` () =
     let persons = Person.TestData
 
-    let save, load = Storage<Person>
+    let save, load = StorageMethods<Person>(Simple)
     save persons
     let reloaded = load()
 
@@ -89,7 +90,7 @@ let ``Can save and load employees`` () =
         [ for p in Person.TestData do 
             Employee p ]
 
-    let save, load = Storage<Employee>
+    let save, load = StorageMethods<Employee>(Simple)
     save emps
     let reloaded = load()
 
@@ -100,6 +101,7 @@ let ``Can save and load employees`` () =
 let ``Can save and load persons via Json`` () =
     let persons = Person.TestData
 
+    let save, load = StorageMethods<Person>(Json "person.json")
     save persons
     let reloaded = load()
 
@@ -112,6 +114,7 @@ let ``Can save and load employees via Json`` () =
         [ for p in Person.TestData do 
             Employee p ]
 
+    let save, load = StorageMethods<Employee>(Json "employee.json")
     save emps
     let reloaded = load()
 

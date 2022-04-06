@@ -9,6 +9,7 @@
 		<Compile Include="Models.fs" />
 		<Compile Include="SimpleStore.fs" />
 		<Compile Include="JsonStore.fs" />
+		<Compile Include="StorageFactory.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
