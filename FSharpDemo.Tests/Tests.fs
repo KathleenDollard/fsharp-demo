@@ -5,9 +5,19 @@ open Xunit
 open Models
 open Databases
 
-let store = SimpleStore()
-let save = store.Save
-let load = store.LoadAll
+//let store = SimpleStore()
+//let save = store.Save
+//let load = store.LoadAll
+
+//// this is a temporary hack
+//let storeEmployee = SimpleStore<Employee>()
+//let saveEmployee = storeEmployee.Save
+//let loadEmployee = storeEmployee.LoadAll
+
+let Storage<'t> = 
+    let store = SimpleStore<'t>()
+    store.Save, store.LoadAll
+
 
 [<Fact>]
 let ``Can create a person`` () =
@@ -65,6 +75,8 @@ let ``Can create an manager with employees`` () =
 [<Fact>]
 let ``Can save and load persons`` () =
     let persons = Person.TestData
+
+    let save, load = Storage<Person>
     save persons
     let reloaded = load()
 
@@ -77,6 +89,7 @@ let ``Can save and load employees`` () =
         [ for p in Person.TestData do 
             Employee p ]
 
+    let save, load = Storage<Employee>
     save emps
     let reloaded = load()
 

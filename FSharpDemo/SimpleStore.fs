@@ -2,8 +2,8 @@
 
 open Models
 
-type SimpleStore() =
-    let mutable store: Person list = []
+type SimpleStore<'t>() =
+    let mutable store: 't list = []
 
     member _.Save data = 
         store <- data
