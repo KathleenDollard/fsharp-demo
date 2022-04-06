@@ -69,3 +69,15 @@ let ``Can save and load persons`` () =
     let reloaded = load()
 
     Assert.Equal<Person>(persons, reloaded)
+
+
+[<Fact>]
+let ``Can save and load employees`` () =
+    let emps = 
+        [ for p in Person.TestData do 
+            Employee p ]
+
+    save emps
+    let reloaded = load()
+
+    Assert.Equal<Employee>(emps, reloaded)
