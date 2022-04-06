@@ -19,3 +19,7 @@ type Person =
           GivenName = givenName
           FamilyName = familyName
           IsFamilyNameFirst= false }
+
+    static member TestData =
+        [ Person.Create 1 "Fred" "Jones"
+          Person.Create 2 "Sally" "Smith" ]
