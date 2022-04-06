@@ -23,3 +23,9 @@ type Person =
     static member TestData =
         [ Person.Create 1 "Fred" "Jones"
           Person.Create 2 "Sally" "Smith" ]
+
+
+type Employee =
+    | Employee of person: Person
+    | Manager of manager: Person * employees: Person list
+

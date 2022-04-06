@@ -33,3 +33,30 @@ let ``Lists of differnt length are not equal`` () =
           for p in Person.TestData do p ]
 
     Assert.NotEqual<Person>(data1, Person.TestData)        
+
+
+[<Fact>]
+let ``Can create an employee`` () =
+
+    let emp = Employee (Person.Create 1 "Fred" "Jones")
+    let givenName = 
+        match emp with 
+        | Employee p -> p.GivenName
+        | Manager (p, _) -> p.GivenName
+
+    Assert.Equal(givenName, "Fred")
+
+[<Fact>]
+let ``Can create an employee that is a manager`` () =
+    let manager = Manager (Person.TestData[1], [])
+
+    Assert.Equal((Employee.person manager).GivenName, "Sally")
+
+
+[<Fact>]
+let ``Can create an manager with employees`` () =
+    let manager = Manager (Person.TestData[1], 
+        [TestData[0]
+          Employee (Person.Create 3 "Ben" "Brown")])
+
+    Assert.Equal((Employee.person manager).GivenName, "Sally")
