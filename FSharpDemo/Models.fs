@@ -27,5 +27,9 @@ type Person =
 
 type Employee =
     | Employee of person: Person
-    | Manager of manager: Person * employees: Person list
+    | Manager of manager: Person * employees: Employee list
 
+    static member Person employee =
+        match employee with
+        | Employee p -> p
+        | Manager (p, _) -> p

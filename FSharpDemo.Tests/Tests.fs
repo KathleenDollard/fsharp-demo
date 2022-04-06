@@ -39,24 +39,19 @@ let ``Lists of differnt length are not equal`` () =
 let ``Can create an employee`` () =
 
     let emp = Employee (Person.Create 1 "Fred" "Jones")
-    let givenName = 
-        match emp with 
-        | Employee p -> p.GivenName
-        | Manager (p, _) -> p.GivenName
 
-    Assert.Equal(givenName, "Fred")
+    Assert.Equal((Employee.Person emp).GivenName, "Fred")
 
 [<Fact>]
 let ``Can create an employee that is a manager`` () =
     let manager = Manager (Person.TestData[1], [])
 
-    Assert.Equal((Employee.person manager).GivenName, "Sally")
-
+    Assert.Equal((Employee.Person manager).GivenName, "Sally")
 
 [<Fact>]
 let ``Can create an manager with employees`` () =
     let manager = Manager (Person.TestData[1], 
-        [TestData[0]
+        [ Employee (Person.TestData[0])
           Employee (Person.Create 3 "Ben" "Brown")])
 
-    Assert.Equal((Employee.person manager).GivenName, "Sally")
+    Assert.Equal((Employee.Person manager).GivenName, "Sally")
