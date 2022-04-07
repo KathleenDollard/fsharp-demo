@@ -7,6 +7,8 @@ type Person =
       GivenName: string
       FamilyName: string }
 
-type PersonClass(name: string) =
-    member this.Name = name
+type PersonClass(id: int, givenName: string,familyName: string) =
+    member _.Id = id
+    member this.GivenName = givenName
+    member this.FamilyName = familyName
 

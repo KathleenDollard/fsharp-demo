@@ -13,4 +13,10 @@ let ``Can create a person`` () =
 
     Assert.Equal(fred.GivenName, "Fred")
 
+[<Fact>]
+let ``Can create an instance of PersonClass`` () =
+    let fred = PersonClass( 4, "Fred","Jones" )
+
+    Assert.Equal(fred.GivenName, "Fred")
+
 
